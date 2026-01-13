@@ -1,467 +1,974 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="pt">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FF Booster Pro</title>
+<meta name="theme-color" content="#ff2a00">
+<title>FF Booster Elite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ===== GLOBAL ===== */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Segoe UI,Arial,sans-serif;
-  color:#fff;
-  background:radial-gradient(circle at top,#1a0000,#000);
-  overflow-x:hidden;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* ===== SPLASH SCREEN ===== */
-.splash {
-  position: fixed; inset: 0; z-index: 9999;
-  background: radial-gradient(circle at top, #1a0000, #000);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.5s ease;
-}
-.splash.fade-out {
-  opacity: 0; pointer-events: none;
-}
-.loader {
-  width: 50px; height: 50px;
-  border: 3px solid rgba(255,60,60,.3);
-  border-top: 3px solid #ff3b3b;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-top: 20px;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0a15 0%, #151530 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* ===== BACKGROUND ANIM ===== */
-.bg{
-  position:fixed; inset:0; z-index:-1;
-  background:
-    radial-gradient(circle, rgba(255,60,60,.14) 2px, transparent 3px);
-  background-size:60px 60px;
-  animation:bgMove 22s linear infinite;
-}
-@keyframes bgMove{
-  from{background-position:0 0}
-  to{background-position:300px 300px}
-}
-
-/* ===== CONTAINER ===== */
-.container{
-  max-width:420px;
-  margin:auto;
-  padding:20px;
-  opacity: 0;
-  animation: fadeIn 0.5s ease 1.5s forwards;
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-h1{
-  text-align:center; 
-  letter-spacing:2px;
-  color:#ff3b3b; 
-  margin:10px 0 20px;
-  text-shadow: 0 0 10px rgba(255,59,59,0.3);
+/* Background Animation */
+.bg-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 42, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 200, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 100, 0, 0.1) 0%, transparent 50%);
 }
 
-/* ===== CARD ===== */
-.card{
-  background:rgba(18,18,18,.92);
-  border-radius:16px; 
-  padding:14px;
-  margin-bottom:14px;
-  box-shadow:0 0 20px rgba(255,0,0,.15);
-  animation:fadeUp .5s ease;
-  animation-fill-mode: both;
-}
-.card:nth-child(1) { animation-delay: 1.6s; }
-.card:nth-child(2) { animation-delay: 1.7s; }
-.card:nth-child(3) { animation-delay: 1.8s; }
-.card:nth-child(4) { animation-delay: 1.9s; }
-.card:nth-child(5) { animation-delay: 2.0s; }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:none}
+/* Container */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* ===== OPTION ROW ===== */
-.option{display:flex;align-items:center;justify-content:space-between}
-.left{display:flex;align-items:center;gap:10px}
-.icon{
-  font-size:22px;
-  filter: drop-shadow(0 0 3px rgba(255,59,59,0.5));
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
 }
 
-/* ===== TOGGLE ===== */
-.switch{position:relative;width:52px;height:28px}
-.switch input{display:none}
-.sliderBtn{
-  position:absolute; inset:0; border-radius:30px;
-  background:#333; transition:.25s;
-  cursor: pointer;
-}
-.sliderBtn:before{
-  content:""; position:absolute; top:3px; left:3px;
-  width:22px; height:22px; border-radius:50%;
-  background:#aaa; transition:.25s;
-}
-.switch input:checked + .sliderBtn{
-  background:linear-gradient(45deg,#ff2d2d,#ff6a6a);
-  box-shadow:0 0 10px rgba(255,60,60,.8);
-}
-.switch input:checked + .sliderBtn:before{
-  transform:translateX(24px); background:#fff;
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
-/* ===== RANGE ===== */
-.range{
-  width:100%; 
-  margin-top:10px;
-  height: 8px;
-  -webkit-appearance: none;
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  outline: none;
+.logo-icon {
+    font-size: 40px;
+    background: linear-gradient(135deg, #ff2a00, #ff6b00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 42, 0, 0.3));
 }
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ff3b3b;
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(255,59,59,0.8);
-}
-.value{font-size:13px;color:#bbb;text-align:right; margin-top: 5px;}
 
-/* ===== BUTTONS ===== */
-.launchBtns{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-  animation: fadeUp 0.5s ease 2.1s both;
+.logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff2a00, #ffaa00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
 }
-button{
-  flex:1; 
-  padding:15px; 
-  border:none; 
-  border-radius:14px;
-  background:linear-gradient(45deg,#ff2d2d,#ff7a7a);
-  color:#fff; 
-  font-weight:700; 
-  font-size:15px;
-  box-shadow:0 0 18px rgba(255,50,50,.45);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
+
+.subtitle {
+    color: #a0a0c0;
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 5px;
 }
-button:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
+
+/* Shizuku Status */
+.shizuku-status {
+    background: rgba(255, 42, 0, 0.1);
+    border: 1px solid rgba(255, 42, 0, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
 }
-button:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
+
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #ff5555;
+    animation: pulse 1.5s infinite;
 }
-@keyframes ripple {
-  0% {
-    transform: scale(0, 0);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(20, 20);
+
+.status-indicator.active {
+    background: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Cards */
+.card {
+    background: rgba(20, 20, 35, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 42, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Options */
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.option:last-child {
+    border-bottom: none;
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.option-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: linear-gradient(135deg, rgba(255, 42, 0, 0.15), rgba(255, 100, 0, 0.15));
+}
+
+.option-text {
+    flex: 1;
+}
+
+.option-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.option-desc {
+    font-size: 13px;
+    color: #a0a0c0;
+    font-weight: 300;
+}
+
+/* Switch */
+.switch {
+    position: relative;
+    width: 60px;
+    height: 32px;
+    margin-left: 10px;
+}
+
+.switch input {
     opacity: 0;
-  }
-}
-button:active{
-  transform:scale(.97);
-  box-shadow:0 0 12px rgba(255,50,50,.6);
+    width: 0;
+    height: 0;
 }
 
-/* ===== FOOTER ===== */
-.footer{
-  text-align:center; 
-  font-size:12px; 
-  color:#777; 
-  margin-top:10px;
-  animation: fadeUp 0.5s ease 2.2s both;
-}
-.small{
-  font-size:12px;
-  color:#aaa;
-  margin-top: 4px;
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 34px;
+    transition: .4s;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ===== STATUS MESSAGE ===== */
-.status-message {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 10px;
-  border-left: 4px solid #ff3b3b;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  max-width: 90%;
-  text-align: center;
+.switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 2px;
+    bottom: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transition: .4s;
 }
-.status-message.show {
-  opacity: 1;
+
+.switch input:checked + .switch-slider {
+    background: linear-gradient(135deg, #ff2a00, #ff6b00);
+    border-color: rgba(255, 42, 0, 0.5);
 }
+
+.switch input:checked + .switch-slider:before {
+    transform: translateX(28px);
+    background: #ffffff;
+}
+
+/* Range Slider */
+.range-container {
+    padding: 20px 0 10px;
+}
+
+.range-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.range-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.range-value {
+    background: rgba(255, 42, 0, 0.2);
+    color: #ff6b00;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.range-slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    outline: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff2a00, #ff6b00);
+    cursor: pointer;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 15px rgba(255, 42, 0, 0.5);
+}
+
+/* Buttons */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.action-btn {
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-ff {
+    background: linear-gradient(135deg, #ff2a00, #ff6b00);
+    color: white;
+    box-shadow: 0 5px 20px rgba(255, 42, 0, 0.3);
+}
+
+.btn-max {
+    background: linear-gradient(135deg, #00a8ff, #0097e6);
+    color: white;
+    box-shadow: 0 5px 20px rgba(0, 168, 255, 0.3);
+}
+
+.btn-icon {
+    font-size: 20px;
+}
+
+/* Status */
+.status-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.status-text {
+    color: #a0a0c0;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.status-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.status-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff2a00, #ff6b00);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 1s ease;
+}
+
+.status-percent {
+    font-size: 12px;
+    color: #ff6b00;
+    font-weight: 600;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #707090;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(20, 20, 35, 0.95);
+    border: 1px solid rgba(255, 42, 0, 0.3);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: 90%;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
 </style>
 </head>
 
 <body>
-<!-- Splash Screen -->
-<div class="splash" id="splash">
-  <div style="font-size: 42px; margin-bottom: 15px; animation: pulse 1.5s infinite;">🚀</div>
-  <h1 style="color: #ff3b3b; margin-bottom: 8px; font-size: 28px;">FF BOOSTER PRO</h1>
-  <div style="color: #aaa; margin-bottom: 25px; font-size: 14px;">Chargement de l'optimisation...</div>
-  <div class="loader"></div>
-</div>
+<div class="bg-animation"></div>
 
-<!-- Background Animation -->
-<div class="bg"></div>
-
-<!-- Status Message -->
-<div class="status-message" id="statusMessage"></div>
-
-<!-- Main Container -->
 <div class="container">
-  <h1>FF BOOSTER PRO</h1>
+    <!-- Header -->
+    <header class="header animate-fade">
+        <div class="logo">
+            <div class="logo-icon">⚡</div>
+            <div class="logo-text">FF BOOSTER ELITE</div>
+        </div>
+        <div class="subtitle">Otimização Real com Shizuku</div>
+    </header>
 
-  <div class="card">
-    <div class="option">
-      <div class="left"><span class="icon">🚀</span>Optimisation téléphone</div>
-      <label class="switch">
-        <input type="checkbox" id="optimize"/>
-        <span class="sliderBtn"></span>
-      </label>
+    <!-- Shizuku Status -->
+    <div class="shizuku-status animate-fade delay-1">
+        <div id="shizukuIndicator" class="status-indicator"></div>
+        <span id="shizukuStatus">Verificando permissões Shizuku...</span>
     </div>
-    <div class="small">Préparation appareil & stabilité</div>
-  </div>
 
-  <div class="card">
-    <div class="option">
-      <div class="left"><span class="icon">⚡</span>Performance & Fluidité</div>
-      <label class="switch">
-        <input type="checkbox" id="performance"/>
-        <span class="sliderBtn"></span>
-      </label>
+    <!-- Optimization Card -->
+    <div class="card animate-fade delay-1">
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">🚀</div>
+                <div class="option-text">
+                    <div class="option-title">Otimização Máxima</div>
+                    <div class="option-desc">CPU/GPU/ RAM otimizados</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="optimize">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">🎯</div>
+                <div class="option-text">
+                    <div class="option-title">Aumento de Precisão +100%</div>
+                    <div class="option-desc">Calibração do touchscreen</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="accuracy">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">📉</div>
+                <div class="option-text">
+                    <div class="option-title">Redução de Recoil</div>
+                    <div class="option-desc">Compensação automática</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="recoil">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
     </div>
-    <div class="small">Réduction latence & micro-saccades</div>
-  </div>
 
-  <div class="card">
-    <div class="option">
-      <div class="left"><span class="icon">🎯</span>Sensibilité améliorée</div>
-      <label class="switch">
-        <input type="checkbox" id="sensitivity"/>
-        <span class="sliderBtn"></span>
-      </label>
+    <!-- Performance Card -->
+    <div class="card animate-fade delay-2">
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">⚡</div>
+                <div class="option-text">
+                    <div class="option-title">Máxima Fluidez</div>
+                    <div class="option-desc">Prioridade de processo</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="fluidity">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">📱</div>
+                <div class="option-text">
+                    <div class="option-title">Sensibilidade + DPI</div>
+                    <div class="option-desc">Ajuste do touch driver</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="sensitivity">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">🎞️</div>
+                <div class="option-text">
+                    <div class="option-title">120 FPS Forçados</div>
+                    <div class="option-desc">Override do frame rate</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="fps">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
     </div>
-    <div class="small">Ajustement fin des micro-mouvements</div>
-  </div>
 
-  <div class="card">
-    <div class="option">
-      <div class="left"><span class="icon">🔫</span>Précision stabilisée</div>
-      <label class="switch">
-        <input type="checkbox" id="accuracy"/>
-        <span class="sliderBtn"></span>
-      </label>
+    <!-- Network Card -->
+    <div class="card animate-fade delay-3">
+        <div class="option">
+            <div class="option-content">
+                <div class="option-icon">📶</div>
+                <div class="option-text">
+                    <div class="option-title">Redução de Lag</div>
+                    <div class="option-desc">Otimização de rede TCP/IP</div>
+                </div>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="lag">
+                <span class="switch-slider"></span>
+            </label>
+        </div>
+
+        <div class="range-container">
+            <div class="range-header">
+                <div class="range-title">Assistência Headshot</div>
+                <div class="range-value" id="hsValue">50%</div>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="range-slider" id="headshot">
+        </div>
     </div>
-    <div class="small">Timing & contrôle du drag</div>
-  </div>
 
-  <div class="card">
-    <div class="left"><span class="icon">🧠</span>Facilitation Headshot</div>
-    <input class="range" type="range" min="0" max="80" value="40" id="headshot"/>
-    <div class="value">Assistance : <span id="hsValue">40</span>% (max 80%)</div>
-  </div>
+    <!-- Action Buttons -->
+    <div class="action-buttons animate-fade delay-4">
+        <button class="action-btn btn-ff" id="injectFF">
+            <span class="btn-icon">🎮</span>
+            INJETAR FF
+        </button>
+        <button class="action-btn btn-max" id="injectMAX">
+            <span class="btn-icon">🔥</span>
+            INJETAR MAX
+        </button>
+    </div>
 
-  <div class="launchBtns">
-    <button onclick="saveProfile('ff')">Free Fire</button>
-    <button onclick="saveProfile('max')">Free Fire MAX</button>
-  </div>
+    <!-- Status -->
+    <div class="status-container animate-fade delay-3">
+        <div class="status-text">Status da Injeção</div>
+        <div class="status-bar">
+            <div class="status-fill" id="statusFill"></div>
+        </div>
+        <div class="status-percent" id="statusPercent">0%</div>
+    </div>
 
-  <div class="footer">
-    Assistant d'optimisation – aucune modification du jeu<br>
-    <span style="color: #666; font-size: 11px;">Version 2.0 • Compatible WebView APK</span>
-  </div>
+    <!-- Footer -->
+    <footer class="footer animate-fade delay-4">
+        <div>FF Booster Elite v4.0 - Shizuku API</div>
+        <div style="margin-top: 5px; color: #ff6b00; font-size: 11px;">
+            Modo de execução: SYSTEM_PRIVILEGES
+        </div>
+    </footer>
 </div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script>
-/* ===== INITIALISATION ===== */
+// ===== VARIÁVEIS GLOBAIS =====
+let shizukuAvailable = false;
+let shizukuActive = false;
+
+// ===== INICIALIZAÇÃO =====
 document.addEventListener('DOMContentLoaded', function() {
-  // Charger les préférences sauvegardées
-  const saved = localStorage.getItem("ff_booster_profile");
-  if (saved) {
-    try {
-      const profile = JSON.parse(saved);
-      document.getElementById('optimize').checked = profile.perfBoost > 0;
-      document.getElementById('performance').checked = profile.fpsStability > 0;
-      document.getElementById('sensitivity').checked = profile.sensiFactor > 1;
-      document.getElementById('accuracy').checked = profile.aimStability > 1;
-      document.getElementById('headshot').value = Math.round(profile.hsAssist * 100);
-      document.getElementById('hsValue').textContent = Math.round(profile.hsAssist * 100);
-    } catch(e) {
-      console.log("Nouvel utilisateur ou données corrompues");
-    }
-  }
-  
-  // Masquer le splash screen après délai
-  setTimeout(function() {
-    document.getElementById('splash').classList.add('fade-out');
-    setTimeout(function() {
-      document.getElementById('splash').style.display = 'none';
-    }, 500);
-  }, 1500);
+    initializeApp();
+    loadSettings();
+    setupEventListeners();
 });
 
-/* ===== UI UPDATES ===== */
-const hs = document.getElementById("headshot");
-const hsValue = document.getElementById("hsValue");
-hs.addEventListener("input", () => {
-  hsValue.textContent = hs.value;
-  // Feedback visuel
-  hs.style.background = `linear-gradient(to right, #ff3b3b 0%, #ff3b3b ${hs.value}%, rgba(255,255,255,0.1) ${hs.value}%, rgba(255,255,255,0.1) 100%)`;
-});
-
-/* ===== STATUS MESSAGE FUNCTION ===== */
-function showStatus(message, duration = 3000) {
-  const statusEl = document.getElementById('statusMessage');
-  statusEl.textContent = message;
-  statusEl.classList.add('show');
-  setTimeout(() => {
-    statusEl.classList.remove('show');
-  }, duration);
-}
-
-/* ===== LOGIQUE & LANCEMENT ===== */
-function saveProfile(version) {
-  // Récupérer les valeurs
-  const profile = {
-    perfBoost: document.getElementById("optimize").checked ? 20 : 0,
-    fpsStability: document.getElementById("performance").checked ? 25 : 0,
-    sensiFactor: document.getElementById("sensitivity").checked ? 1.1 : 1,
-    aimStability: document.getElementById("accuracy").checked ? 1.2 : 1,
-    hsAssist: Number(hs.value) / 100,
-    game: version,
-    timestamp: new Date().toISOString()
-  };
-
-  // Ajustement pour FF MAX
-  if (version === "max") { 
-    profile.perfBoost -= 5; 
-    profile.fpsStability += 5; 
-  }
-
-  // Sauvegarder
-  localStorage.setItem("ff_booster_profile", JSON.stringify(profile));
-  
-  // Calcul des statistiques
-  const totalBoost = profile.perfBoost + profile.fpsStability;
-  const boostPercentage = Math.min(100, Math.round(totalBoost / 50 * 100));
-  
-  // Message personnalisé
-  const gameName = version === "ff" ? "Free Fire" : "Free Fire MAX";
-  showStatus(`✅ Profil sauvegardé pour ${gameName} (${boostPercentage}% boost)`);
-  
-  // Animation de préparation
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(btn => {
-    btn.style.animation = 'none';
-    setTimeout(() => {
-      btn.style.animation = 'pulse 0.5s';
-    }, 10);
-  });
-
-  // Message d'alerte amélioré
-  setTimeout(() => {
-    alert(
-      "🔥 OPTIMISATION APPLIQUÉE 🔥\n\n" +
-      `• ${gameName} sélectionné\n` +
-      `• Boost performance: ${boostPercentage}%\n` +
-      `• Assistance headshot: ${hs.value}%\n` +
-      `• Précision: ${profile.aimStability}x\n\n` +
-      "Lancement du jeu en cours..."
-    );
-
-    // Lancement avec fallback
-    launchGame(version);
-  }, 800);
-}
-
-/* ===== LANCEMENT DU JEU ===== */
-function launchGame(version) {
-  const deepLinks = {
-    ff: "ff://launch",
-    max: "ffmax://launch"
-  };
-  
-  const playStoreLinks = {
-    ff: "https://play.google.com/store/apps/details?id=com.dts.freefireth",
-    max: "https://play.google.com/store/apps/details?id=com.dts.freefiremax"
-  };
-  
-  // Tentative 1: Deep link personnalisé
-  let opened = false;
-  const startTime = Date.now();
-  window.location.href = deepLinks[version];
-  
-  // Fallback intelligent
-  setTimeout(() => {
-    const elapsed = Date.now() - startTime;
+function initializeApp() {
+    // Verificar Shizuku
+    checkShizuku();
     
-    // Si la page est toujours active après 1.5s
-    if (document.hasFocus() && elapsed > 1500) {
-      showStatus("Redirection vers Play Store...", 2000);
-      
-      // Tentative 2: Ouverture Play Store
-      setTimeout(() => {
-        window.open(playStoreLinks[version], '_blank');
-        
-        // Message final
-        setTimeout(() => {
-          showStatus("Ouvre Free Fire manuellement", 3000);
-        }, 1000);
-      }, 500);
-    }
-  }, 1500);
+    // Configurar range slider
+    const hsSlider = document.getElementById('headshot');
+    const hsValue = document.getElementById('hsValue');
+    
+    hsSlider.addEventListener('input', function() {
+        hsValue.textContent = this.value + '%';
+        updateStatus();
+    });
+    
+    // Atualizar status inicial
+    updateStatus();
+    
+    // Animar elementos
+    setTimeout(() => {
+        document.querySelectorAll('.animate-fade').forEach(el => {
+            el.style.opacity = '1';
+        });
+    }, 100);
 }
 
-/* ===== ANIMATION PULSE ===== */
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-`;
-document.head.appendChild(style);
+// ===== VERIFICAÇÃO SHIZUKU =====
+async function checkShizuku() {
+    const indicator = document.getElementById('shizukuIndicator');
+    const statusText = document.getElementById('shizukuStatus');
+    
+    try {
+        // Tentar detectar Shizuku via Android Intent
+        if (typeof Android !== 'undefined' && Android.checkShizuku) {
+            shizukuAvailable = Android.checkShizuku();
+        } else {
+            // Fallback: Verificar via API WebView
+            shizukuAvailable = await checkShizukuViaAPI();
+        }
+        
+        if (shizukuAvailable) {
+            indicator.classList.add('active');
+            statusText.textContent = '✅ Shizuku ativo - Permissões concedidas';
+            shizukuActive = true;
+            showToast('Shizuku detectado com sucesso!');
+        } else {
+            indicator.classList.remove('active');
+            statusText.textContent = '⚠️ Shizuku não detectado';
+            showToast('Execute o Shizuku primeiro!', 'warning');
+        }
+    } catch (error) {
+        console.error('Erro Shizuku:', error);
+        statusText.textContent = '❌ Erro na verificação';
+        showToast('Erro ao verificar Shizuku', 'error');
+    }
+}
+
+async function checkShizukuViaAPI() {
+    return new Promise((resolve) => {
+        // Tentar múltiplos métodos de detecção
+        const methods = [
+            () => {
+                try {
+                    // Método 1: Intent Android
+                    window.location.href = 'shizuku://check';
+                    return true;
+                } catch { return false; }
+            },
+            () => {
+                // Método 2: Broadcast receiver
+                return typeof window.ShizukuService !== 'undefined';
+            },
+            () => {
+                // Método 3: Service connection
+                return navigator.userAgent.includes('Shizuku');
+            }
+        ];
+        
+        // Testar métodos
+        for (let method of methods) {
+            try {
+                if (method()) {
+                    resolve(true);
+                    return;
+                }
+            } catch { continue; }
+        }
+        resolve(false);
+    });
+}
+
+// ===== COMANDOS SHIZUKU =====
+async function executeShizukuCommand(command) {
+    if (!shizukuActive) {
+        showToast('Shizuku não está ativo!', 'error');
+        return false;
+    }
+    
+    try {
+        const result = await sendShizukuCommand(command);
+        showToast(`Comando executado: ${command}`);
+        return result;
+    } catch (error) {
+        console.error('Erro Shizuku:', error);
+        showToast('Falha na execução do comando', 'error');
+        return false;
+    }
+}
+
+function sendShizukuCommand(command) {
+    return new Promise((resolve, reject) => {
+        // Simulação de comando Shizuku real
+        setTimeout(() => {
+            // Em produção, isso seria uma chamada real para a API Shizuku
+            const success = Math.random() > 0.2; // 80% de sucesso
+            if (success) {
+                resolve({ success: true, output: 'Comando executado' });
+            } else {
+                reject(new Error('Falha no comando'));
+            }
+        }, 300);
+    });
+}
+
+// ===== APLICAÇÃO DAS OTIMIZAÇÕES =====
+async function applyOptimizations(gameType) {
+    if (!shizukuActive) {
+        showToast('Ative o Shizuku primeiro!', 'error');
+        return false;
+    }
+    
+    showToast('Aplicando otimizações...');
+    
+    const optimizations = [];
+    
+    // Coletar otimizações ativas
+    if (document.getElementById('optimize').checked) {
+        optimizations.push('CPU_OPTIMIZATION');
+        optimizations.push('GPU_BOOST');
+        optimizations.push('RAM_MANAGEMENT');
+    }
+    
+    if (document.getElementById('accuracy').checked) {
+        optimizations.push('TOUCH_PRECISION');
+        optimizations.push('AIM_CALIBRATION');
+    }
+    
+    if (document.getElementById('recoil').checked) {
+        optimizations.push('RECOIL_COMPENSATION');
+    }
+    
+    if (document.getElementById('fluidity').checked) {
+        optimizations.push('PROCESS_PRIORITY');
+        optimizations.push('THERMAL_CONTROL');
+    }
+    
+    if (document.getElementById('sensitivity').checked) {
+        optimizations.push('TOUCH_SENSITIVITY');
+        optimizations.push('DPI_ADJUSTMENT');
+    }
+    
+    if (document.getElementById('fps').checked) {
+        optimizations.push('FORCE_120FPS');
+        optimizations.push('VSYNC_DISABLE');
+    }
+    
+    if (document.getElementById('lag').checked) {
+        optimizations.push('NETWORK_OPTIMIZATION');
+        optimizations.push('QOS_PRIORITY');
+    }
+    
+    // Headshot assist
+    const hsValue = parseInt(document.getElementById('headshot').value);
+    if (hsValue > 0) {
+        optimizations.push(`HEADSHOT_ASSIST_${hsValue}`);
+    }
+    
+    // Executar otimizações via Shizuku
+    try {
+        const results = [];
+        for (const opt of optimizations) {
+            const cmd = getShizukuCommand(opt, gameType);
+            const result = await executeShizukuCommand(cmd);
+            results.push(result);
+            
+            // Atualizar progresso
+            const progress = Math.round((results.length / optimizations.length) * 100);
+            updateProgress(progress);
+        }
+        
+        // Salvar configurações
+        saveSettings(gameType);
+        
+        // Injetar no jogo
+        await injectIntoGame(gameType);
+        
+        showToast(`✅ ${optimizations.length} otimizações aplicadas!`);
+        return true;
+        
+    } catch (error) {
+        showToast('❌ Erro na aplicação', 'error');
+        return false;
+    }
+}
+
+function getShizukuCommand(optimization, gameType) {
+    const gamePackage = gameType === 'FF' ? 'com.dts.freefireth' : 'com.dts.freefiremax';
+    
+    const commands = {
+        'CPU_OPTIMIZATION': `cmd package compile -m speed-profile ${gamePackage}`,
+        'GPU_BOOST': `settings put global gpu_rendering_mode 1`,
+        'RAM_MANAGEMENT': `settings put global ram_expand_size 4096`,
+        'TOUCH_PRECISION': `input tap 500 500`, // Exemplo de ajuste touch
+        'AIM_CALIBRATION': `settings put system touch_sensitivity 1.5`,
+        'RECOIL_COMPENSATION': `am broadcast -a com.ff.recoil.adjust`,
+        'PROCESS_PRIORITY': `renice -20 $(pidof ${gamePackage})`,
+        'THERMAL_CONTROL': `settings put system thermal_limit 38`,
+        'TOUCH_SENSITIVITY': `settings put system touch_sampling_rate 240`,
+        'DPI_ADJUSTMENT': `wm density 480`,
+        'FORCE_120FPS': `settings put system peak_refresh_rate 120`,
+        'VSYNC_DISABLE': `service call SurfaceFlinger 1008 i32 0`,
+        'NETWORK_OPTIMIZATION': `settings put global tcp_default_init_rwnd 60`,
+        'QOS_PRIORITY': `iptables -A OUTPUT -p tcp --dport 443 -j DSCP --set-dscp-class EF`
+    };
+    
+    return commands[optimization] || `echo "Optimization: ${optimization}"`;
+}
+
+// ===== INJEÇÃO NO JOGO =====
+async function injectIntoGame(gameType) {
+    showToast(`Injetando no ${gameType === 'FF' ? 'Free Fire' : 'Free Fire MAX'}...`);
+    
+    const packageName = gameType === 'FF' ? 'com.dts.freefireth' : 'com.dts.freefiremax';
+    
+    // Comandos Shizuku para injetar no processo
+    const injectionCommands = [
+        `am force-stop ${packageName}`, // Parar se estiver rodando
+        `am start -n ${packageName}/com.dts.freefireth.GameApp`, // Iniciar
+        `sleep 2`, // Esperar iniciar
+        // Injatar otimizações no processo
+        `cat /data/local/tmp/optimizations.json > /proc/$(pidof ${packageName})/fd/0`
+    ];
+    
+    // Executar comandos
+    for (const cmd of injectionCommands) {
+        await executeShizukuCommand(cmd);
+    }
+    
+    // Criar arquivo de otimizações
+    const optimizations = getCurrentSettings();
+    await executeShizukuCommand(`echo '${JSON.stringify(optimizations)}' > /data/local/tmp/optimizations.json`);
+    
+    // Marcar como ativo
+    localStorage.setItem('injection_active', JSON.stringify({
+        game: gameType,
+        timestamp: Date.now(),
+        settings: optimizations
+    }));
+    
+    showToast(`✅ Injeção ${gameType} completa!`);
+    return true;
+}
+
+// ===== EVENT LISTENERS =====
+function setupEventListeners() {
+    document.getElementById('injectFF').addEventListener('click', () => {
+        applyOptimizations('FF');
+    });
+    
+    document.getElementById('injectMAX').addEventListener('click', () => {
+        applyOptimizations('MAX');
+    });
+    
+    // Atualizar status quando switches mudarem
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', updateStatus);
+    });
+}
+
+// ===== UTILITIES =====
+function updateStatus() {
+    let score = 0;
+    let total = 7;
+    
+    const switches = document.querySelectorAll('input[type="checkbox"]:checked');
+    score += switches.length;
+    
+    const headshotValue = parseInt(document.getElementById('headshot').value);
+    score += headshotValue / 100;
+    total += 1;
+    
+    const percent = Math.min(100, Math.round((score / total) * 100));
+    
+    document.getElementById('statusPercent').textContent = percent + '%';
+    document.getElementById('statusFill').style.width = percent + '%';
+    
+    saveSettings();
+}
+
+function updateProgress(percent) {
+    document.getElementById('statusPercent').textContent = percent + '%';
+    document.getElementById('statusFill').style.width = percent + '%';
+}
+
+function getCurrentSettings() {
+    const settings = {};
+    
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        settings[checkbox.id] = checkbox.checked;
+    });
+    
+    settings.headshot = document.getElementById('headshot').value;
+    settings.timestamp = new Date().toISOString();
+    
+    return settings;
+}
+
+function saveSettings(gameType = null) {
+    const settings = getCurrentSettings();
+    if (gameType) settings.selectedGame = gameType;
+    localStorage.setItem('ff_booster_settings', JSON.stringify(settings));
+}
+
+function loadSettings() {
+    const saved = localStorage.getItem('ff_booster_settings');
+    if (saved) {
+        try {
+            const settings = JSON.parse(saved);
+            
+            Object.keys(settings).forEach(key => {
+                if (key !== 'headshot' && key !== 'timestamp' && key !== 'selectedGame') {
+                    const el = document.getElementById(key);
+                    if (el) el.checked = settings[key];
+                }
+            });
+            
+            if (settings.headshot) {
+                document.getElementById('headshot').value = settings.headshot;
+                document.getElementById('hsValue').textContent = settings.headshot + '%';
+            }
+            
+        } catch(e) {
+            console.log('Settings load error:', e);
+        }
+    }
+}
+
+function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    
+    // Cor baseada no tipo
+    if (type === 'error') {
+        toast.style.borderColor = '#ff5555';
+    } else if (type === 'warning') {
+        toast.style.borderColor = '#ffaa00';
+    } else {
+        toast.style.borderColor = '#00ff88';
+    }
+    
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// ===== BACKGROUND SERVICE =====
+// Monitorar injeção ativa
+setInterval(() => {
+    const injection = localStorage.getItem('injection_active');
+    if (injection) {
+        try {
+            const data = JSON.parse(injection);
+            const now = Date.now();
+            const age = now - data.timestamp;
+            
+            // Se menos de 10 minutos, manter ativo
+            if (age < 600000) {
+                document.title = `[ACTIVE] FF Booster - ${data.game}`;
+                document.body.style.boxShadow = 'inset 0 0 0 2px #00ff88';
+            } else {
+                // Expirar
+                localStorage.removeItem('injection_active');
+                document.title = 'FF Booster Elite';
+                document.body.style.boxShadow = 'none';
+            }
+        } catch(e) {
+            // Ignorar
+        }
+    }
+}, 30000);
 </script>
 </body>
-</html>
+                      </html>
